@@ -1,0 +1,5 @@
+# DRIXL Funding Configuration
+# This file enables the Sponsor button on the GitHub repository page.
+# Supported platforms: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+
+github: SamoTech
