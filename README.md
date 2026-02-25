@@ -35,6 +35,8 @@
     &middot;
     <a href="#getting-started"><strong>Getting Started</strong></a>
     &middot;
+    <a href="#cli-tool"><strong>CLI Tool</strong></a>
+    &middot;
     <a href="#benchmarks"><strong>Benchmarks</strong></a>
 </p>
 
@@ -144,6 +146,13 @@ DRIXL uses a fixed set of action verbs. All agents share this vocabulary:
 | `STOR` | Save to memory | `STOR [key:last_result] [val:ref#4]` |
 | `FETCH` | Retrieve data | `FETCH [url:https://...] [out:html]` |
 | `CMPX` | Compare values | `CMPX [val_a] [val_b] [out:diff]` |
+| `RETRY` | Retry task | `RETRY [max:3] [delay:5s]` |
+| `MERGE` | Merge results | `MERGE [source_a] [source_b]` |
+| `SPLIT` | Split for parallel | `SPLIT [batch:10]` |
+| `AUTH` | Authenticate | `AUTH [token:xyz]` |
+| `LOG` | Emit log entry | `LOG [level:info]` |
+| `WAIT` | Pause execution | `WAIT [condition:ready]` |
+| `CACHE` | Cache result | `CACHE [ttl:300]` |
 
 ---
 
@@ -183,6 +192,11 @@ DRIXL requires Python 3.10 or higher:
 
 ```bash
 pip install drixl
+```
+
+With CLI tools:
+```bash
+pip install "drixl[cli]"
 ```
 
 With Redis context store support:
@@ -232,6 +246,60 @@ print(msg_3)
 
 ---
 
+## CLI Tool
+
+**New in v0.2.0:** DRIXL now includes a powerful command-line tool:
+
+### Parse and Validate Messages
+```bash
+drixl parse "@to:AGT2 @fr:AGT1 @t:REQ @p:HIGH\nANLY [input.json]"
+# ✓ Valid DRIXL message
+# Envelope:
+#   To:       AGT2
+#   From:     AGT1
+#   Type:     REQ
+#   Priority: HIGH
+# ...
+```
+
+### Build Messages Interactively
+```bash
+drixl build --to AGT2 --from AGT1 --type REQ --priority HIGH --actions ANLY,XTRCT --params input.json,out:json
+# ✓ Message built successfully:
+# @to:AGT2 @fr:AGT1 @t:REQ @p:HIGH
+# ANLY XTRCT [input.json] [out:json]
+```
+
+### List All Verbs
+```bash
+drixl verbs
+# DRIXL Standard Verbs (21 total):
+#   ANLY     Analyze input data or content
+#   XTRCT    Extract specific fields or values
+#   ...
+```
+
+### Search Verbs
+```bash
+drixl verbs --search analyze
+# Verbs matching 'analyze':
+#   ANLY     Analyze input data or content
+```
+
+### Benchmark Token Usage
+```bash
+drixl benchmark
+# Token Usage Comparison
+# ==================================================
+# Format               Tokens    vs DRIXL    Savings
+# ------------------------------------------------------
+# DRIXL                    25        1.00x          -
+# JSON                     60        2.40x        58%
+# Natural Language        120        4.80x        79%
+```
+
+---
+
 ## Benchmarks
 
 Token count comparison: DRIXL vs Natural Language vs JSON vs XML for the same instruction:
@@ -243,7 +311,7 @@ Token count comparison: DRIXL vs Natural Language vs JSON vs XML for the same in
 | 3 | Natural language | ~120 | ~4.8x |
 | 4 | XML (verbose) | ~140 | ~5.6x |
 
-> Benchmarks measured using OpenAI `tiktoken` on 100+ real agent message samples. See [benchmarks.py](https://github.com/SamoTech/DRIXL/blob/main/benchmarks.py) for methodology.
+> Benchmarks measured using OpenAI `tiktoken` on 100+ real agent message samples. Use `drixl benchmark` to compare your own messages.
 
 ---
 
@@ -256,7 +324,8 @@ DRIXL/
 │   ├── message.py           # Message builder & parser
 │   ├── context_store.py     # Shared context store (memory + Redis)
 │   ├── verbs.py             # Standard verb vocabulary
-│   └── exceptions.py        # Custom exceptions
+│   ├── exceptions.py        # Custom exceptions
+│   └── cli.py               # Command-line interface
 ├── examples/
 │   ├── basic_pipeline.py    # 3-agent pipeline example
 │   ├── network_monitor.py   # Network agent example
@@ -264,10 +333,14 @@ DRIXL/
 ├── tests/
 │   ├── test_message.py
 │   ├── test_context_store.py
-│   └── test_verbs.py
+│   ├── test_verbs.py
+│   ├── test_message_enhancements.py
+│   ├── test_context_ttl.py
+│   └── test_cli.py
 ├── .github/
 │   └── workflows/
-│       └── tests.yml
+│       ├── tests.yml
+│       └── publish.yml
 ├── benchmarks.py
 ├── CONTRIBUTING.md
 ├── ROADMAP.md

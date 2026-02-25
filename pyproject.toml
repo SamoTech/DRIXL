@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "drixl"
-version = "0.1.1"
+version = "0.2.0"
 description = "DRIXL - Compressed Inter-Agent Communication Language for Multi-Agent AI Systems"
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -26,8 +26,12 @@ dependencies = []
 
 [project.optional-dependencies]
 redis = ["redis>=5.0"]
-dev = ["pytest>=8.0", "tiktoken>=0.7"]
-all = ["redis>=5.0", "pytest>=8.0", "tiktoken>=0.7"]
+cli = ["click>=8.0"]
+dev = ["pytest>=8.0", "tiktoken>=0.7", "click>=8.0"]
+all = ["redis>=5.0", "pytest>=8.0", "tiktoken>=0.7", "click>=8.0"]
+
+[project.scripts]
+drixl = "drixl.cli:cli"
 
 [project.urls]
 Homepage = "https://github.com/SamoTech/DRIXL"

@@ -3,7 +3,7 @@ DRIXL — Direct Signal Inter-Agent Language
 Compressed inter-agent communication protocol for multi-agent AI systems.
 """
 
-__version__ = "0.1.1"
+__version__ = "0.2.0"
 __author__ = "Ossama Hashim"
 __license__ = "MIT"
 
