@@ -4,7 +4,7 @@ Handles construction and parsing of DRIXL-format inter-agent messages.
 """
 
 import re
-from typing import Optional, Dict, List, Any
+from typing import Optional, Dict, List, Any, Union
 from drixl.verbs import VERBS
 from drixl.exceptions import DRIXLParseError, DRIXLInvalidVerbError
 
@@ -36,9 +36,11 @@ class Message:
         actions: list,
         params: list,
         ctx_ref: Optional[str] = None,
+        format: str = "compact",
+        **kwargs
     ) -> str:
         """
-        Build a DRIXL-formatted inter-agent message.
+        Build a DRIXL message in compact or structured format.
 
         Args:
             to: Recipient agent ID (e.g., 'AGT2')
@@ -48,10 +50,36 @@ class Message:
             actions: List of DRIXL verbs (e.g., ['ANLY', 'XTRCT'])
             params: List of parameters (e.g., ['input.json', 'out:json'])
             ctx_ref: Optional context store reference ID (e.g., 'ref#1')
+            format: 'compact' (default) or 'structured' (XML)
+            **kwargs: Additional arguments for structured format (intent, status, etc.)
 
         Returns:
-            Formatted DRIXL message string
+            Formatted DRIXL message string (compact or XML)
         """
+        if format == "structured":
+            from drixl.structured import StructuredMessage
+            from drixl.converter import compact_to_structured
+            
+            # Build compact first, then convert
+            compact_msg = Message._build_compact(to, fr, msg_type, priority, actions, params, ctx_ref)
+            structured = compact_to_structured(
+                compact_msg,
+                intent=kwargs.get("intent"),
+                status=kwargs.get("status", "PENDING"),
+                thread_id=kwargs.get("thread_id"),
+                msg_id=kwargs.get("msg_id"),
+                next_action=kwargs.get("next_action")
+            )
+            return structured.to_xml(pretty=kwargs.get("pretty", True))
+        else:
+            return Message._build_compact(to, fr, msg_type, priority, actions, params, ctx_ref)
+    
+    @staticmethod
+    def _build_compact(
+        to: str, fr: str, msg_type: str, priority: str,
+        actions: list, params: list, ctx_ref: Optional[str] = None
+    ) -> str:
+        """Build compact DRIXL format (internal)."""
         if msg_type.upper() not in MESSAGE_TYPES:
             raise ValueError(f"Invalid message type: {msg_type}. Must be one of {MESSAGE_TYPES}")
         if priority.upper() not in PRIORITIES:
@@ -71,7 +99,7 @@ class Message:
         return f"{envelope}\n{body}"
 
     @staticmethod
-    def error(to: str, fr: str, code: str, detail: str, priority: str = "HIGH") -> str:
+    def error(to: str, fr: str, code: str, detail: str, priority: str = "HIGH", format: str = "compact") -> str:
         """
         Build a structured ERR message.
 
@@ -81,6 +109,7 @@ class Message:
             code: Error code (e.g., 'TIMEOUT', 'NOT_FOUND')
             detail: Error detail description
             priority: Message priority (default: HIGH)
+            format: 'compact' or 'structured'
 
         Returns:
             Formatted DRIXL error message
@@ -88,20 +117,37 @@ class Message:
         return Message.build(
             to=to, fr=fr, msg_type="ERR", priority=priority,
             actions=["ESCL"],
-            params=[f"code:{code}", f"detail:{detail}"]
+            params=[f"code:{code}", f"detail:{detail}"],
+            format=format
         )
 
     @staticmethod
     def parse(raw: str, strict: bool = True) -> dict:
         """
-        Parse a raw DRIXL message string into a structured dictionary.
+        Parse a raw DRIXL message string (auto-detects format).
 
         Args:
-            raw: Raw DRIXL message string
-            strict: If True, raises error on unknown verbs. If False, treats all non-bracketed tokens as actions.
+            raw: Raw DRIXL message string (compact or XML)
+            strict: If True, raises error on unknown verbs (compact only)
 
         Returns:
-            Dictionary with keys: envelope, actions, params
+            Dictionary with parsed message data
+        """
+        from drixl.converter import detect_format
+        
+        fmt = detect_format(raw)
+        
+        if fmt == "structured":
+            from drixl.structured import StructuredMessage
+            structured = StructuredMessage.from_xml(raw)
+            return structured.to_dict()
+        else:
+            return Message._parse_compact(raw, strict)
+    
+    @staticmethod
+    def _parse_compact(raw: str, strict: bool = True) -> dict:
+        """
+        Parse compact DRIXL format (internal).
         """
         lines = raw.strip().splitlines()
         if len(lines) < 2:
@@ -187,7 +233,8 @@ class Message:
         actions: List[str],
         params: List[str],
         priority: Optional[str] = None,
-        ctx_ref: Optional[str] = None
+        ctx_ref: Optional[str] = None,
+        format: str = "compact"
     ) -> str:
         """
         Create a reply message (auto-swaps to/fr, sets type=RES).
@@ -197,6 +244,7 @@ class Message:
             params: List of parameters for the reply
             priority: Priority (defaults to original message priority)
             ctx_ref: Context reference (defaults to original ctx_ref)
+            format: 'compact' or 'structured'
 
         Returns:
             Formatted DRIXL reply message string
@@ -208,7 +256,8 @@ class Message:
             priority=priority or self.priority,
             actions=actions,
             params=params,
-            ctx_ref=ctx_ref or self.ctx_ref
+            ctx_ref=ctx_ref or self.ctx_ref,
+            format=format
         )
 
     def __str__(self) -> str:
