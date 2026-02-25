@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "drixl"
-version = "0.2.0"
+version = "0.3.0"
 description = "DRIXL - Compressed Inter-Agent Communication Language for Multi-Agent AI Systems"
 readme = "README.md"
 license = {file = "LICENSE"}
 authors = [{name = "Ossama Hashim", email = "ossama@samotech.dev"}]
 keywords = ["ai", "agents", "multi-agent", "llm", "communication", "protocol", "langchain", "crewai", "langgraph"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
