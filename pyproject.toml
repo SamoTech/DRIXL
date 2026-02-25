@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "drixl"
+version = "0.1.0"
+description = "DRIXL - Compressed Inter-Agent Communication Language for Multi-Agent AI Systems"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [{name = "Ossama Hashim", email = "ossama@samotech.dev"}]
+keywords = ["ai", "agents", "multi-agent", "llm", "communication", "protocol", "langchain", "crewai", "langgraph"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+redis = ["redis>=5.0"]
+dev = ["pytest>=8.0", "tiktoken>=0.7"]
+all = ["redis>=5.0", "pytest>=8.0", "tiktoken>=0.7"]
+
+[project.urls]
+Homepage = "https://github.com/SamoTech/DRIXL"
+Repository = "https://github.com/SamoTech/DRIXL"
+Issues = "https://github.com/SamoTech/DRIXL/issues"
