@@ -21,6 +21,12 @@ VERBS: Dict[str, str] = {
     "NTFY":  "Notify agent or system of an event",
     "RETRY": "Retry the previous failed task",
     "HALT":  "Stop pipeline execution immediately",
+    "MERGE": "Merge two or more results into one",
+    "SPLIT": "Split payload for parallel processing",
+    "AUTH":  "Authenticate or check permissions",
+    "LOG":   "Emit a log entry for observability",
+    "WAIT":  "Pause and wait for dependency or condition",
+    "CACHE": "Cache result with optional TTL",
 }
 
 
