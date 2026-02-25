@@ -15,6 +15,13 @@
         <img alt="Supported Python versions" src="https://img.shields.io/pypi/pyversions/drixl.svg"></a>
     <a href="https://github.com/SamoTech/DRIXL/blob/main/LICENSE">
         <img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+    <br/>
+    <a href="https://github.com/sponsors/SamoTech">
+        <img alt="Sponsor" src="https://img.shields.io/badge/Sponsor-%E2%9D%A4-ea4aaa?logo=github-sponsors"></a>
+    <br/>
+    <img alt="Visitors" src="https://visitor-badge.laobi.icu/badge?page_id=SamoTech.DRIXL">
+    <img alt="GitHub Stars" src="https://img.shields.io/github/stars/SamoTech/DRIXL?style=social">
+    <img alt="GitHub Forks" src="https://img.shields.io/github/forks/SamoTech/DRIXL?style=social">
 </p>
 
 <p align="center">
@@ -268,6 +275,16 @@ DRIXL/
 ├── pyproject.toml
 └── README.md
 ```
+
+---
+
+## Supporting DRIXL
+
+If DRIXL saves you tokens and costs, consider supporting its development:
+
+- ⭐ **Star the repo** — helps others discover DRIXL
+- 💖 **[Sponsor on GitHub](https://github.com/sponsors/SamoTech)** — fund ongoing development
+- 🐛 **[Open an issue](https://github.com/SamoTech/DRIXL/issues)** — report bugs or propose new verbs
 
 ---
 
