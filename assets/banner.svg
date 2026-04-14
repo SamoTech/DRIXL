@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="280" viewBox="0 0 1200 280">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0a1e"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c4b5fd" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#c4b5fd" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#c4b5fd" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="40"/></filter>
+  </defs>
+  <rect width="1200" height="280" fill="url(#bg)"/>
+  <rect x="0" y="60" width="1200" height="160" fill="url(#glow)"/>
+  <circle cx="120" cy="140" r="180" fill="#c4b5fd" opacity="0.07" filter="url(#blur)"/>
+  <circle cx="1080" cy="140" r="160" fill="#7c3aed" opacity="0.18" filter="url(#blur)"/>
+  <rect x="0" y="0" width="5" height="280" fill="#c4b5fd" opacity="0.8"/>
+  <rect x="0" y="276" width="1200" height="4" fill="#c4b5fd" opacity="0.5"/>
+  <circle cx="120" cy="140" r="52" fill="#c4b5fd" opacity="0.15"/>
+  <circle cx="120" cy="140" r="48" fill="none" stroke="#c4b5fd" stroke-width="1.5" opacity="0.4"/>
+  <text x="120" y="155" font-family="Segoe UI Emoji,Apple Color Emoji,sans-serif" font-size="36" text-anchor="middle">⚡</text>
+  <text x="210" y="128" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="52" font-weight="800" fill="white" letter-spacing="-1">DRIXL</text>
+  <text x="212" y="172" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="22" font-weight="400" fill="#c4b5fd" opacity="0.9">Compressed Inter-Agent Communication Protocol</text>
+  <rect x="212" y="200" width="84" height="30" rx="15" fill="#c4b5fd" opacity="0.18"/>
+  <rect x="212" y="200" width="84" height="30" rx="15" fill="none" stroke="#c4b5fd" stroke-width="1" opacity="0.4"/>
+  <text x="254" y="220" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="500" fill="#c4b5fd" text-anchor="middle" opacity="0.9">Python</text>
+  <text x="1180" y="30" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="600" fill="white" text-anchor="end" opacity="0.4">SamoTech</text>
+  <circle cx="1160" cy="140" r="4" fill="#c4b5fd" opacity="0.5"/>
+  <circle cx="1145" cy="140" r="4" fill="#c4b5fd" opacity="0.3"/>
+  <circle cx="1130" cy="140" r="4" fill="#c4b5fd" opacity="0.15"/>
+</svg>
