@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#020c10"/>
+      <stop offset="100%" stop-color="#041218"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <ellipse cx="1000" cy="300" rx="360" ry="300" fill="#06b6d4" fill-opacity="0.06"/>
+  <ellipse cx="140" cy="500" rx="200" ry="180" fill="#0891b2" fill-opacity="0.04"/>
+  <line x1="800" y1="80" x2="800" y2="560" stroke="#06b6d4" stroke-opacity="0.04" stroke-width="1"/>
+  <line x1="860" y1="80" x2="860" y2="560" stroke="#06b6d4" stroke-opacity="0.04" stroke-width="1"/>
+  <line x1="920" y1="80" x2="920" y2="560" stroke="#06b6d4" stroke-opacity="0.06" stroke-width="1"/>
+  <line x1="980" y1="80" x2="980" y2="560" stroke="#06b6d4" stroke-opacity="0.04" stroke-width="1"/>
+  <line x1="1040" y1="80" x2="1040" y2="560" stroke="#06b6d4" stroke-opacity="0.06" stroke-width="1"/>
+  <line x1="1100" y1="80" x2="1100" y2="560" stroke="#06b6d4" stroke-opacity="0.04" stroke-width="1"/>
+  <line x1="1160" y1="80" x2="1160" y2="560" stroke="#06b6d4" stroke-opacity="0.06" stroke-width="1"/>
+  <text x="88" y="198" fill="#94a3b8" font-family="Inter,-apple-system,sans-serif" font-size="22" font-weight="500" letter-spacing="3">SAMOTECH</text>
+  <text x="88" y="316" fill="#ffffff" font-family="'Courier New',monospace" font-size="110" font-weight="800" letter-spacing="-2">DRIXL</text>
+  <rect x="88" y="334" width="180" height="4" rx="2" fill="url(#accent)"/>
+  <text x="88" y="393" fill="#22d3ee" font-family="Inter,-apple-system,sans-serif" font-size="24" font-weight="400">Compressed Inter-Agent Communication Language</text>
+  <text x="88" y="433" fill="#475569" font-family="Inter,-apple-system,sans-serif" font-size="20">80% token savings · 21 verbs · Dual format · PyPI</text>
+  <rect x="88" y="486" width="130" height="38" rx="19" fill="#0891b2" fill-opacity="0.1" stroke="#06b6d4" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="153" y="511" fill="#06b6d4" font-family="monospace" font-size="14" font-weight="600" text-anchor="middle">80% savings</text>
+  <rect x="234" y="486" width="100" height="38" rx="19" fill="#0891b2" fill-opacity="0.08" stroke="#06b6d4" stroke-opacity="0.25" stroke-width="1"/>
+  <text x="284" y="511" fill="#06b6d4" font-family="monospace" font-size="14" font-weight="500" text-anchor="middle">v0.3.0</text>
+  <rect x="350" y="486" width="108" height="38" rx="19" fill="#0891b2" fill-opacity="0.08" stroke="#06b6d4" stroke-opacity="0.25" stroke-width="1"/>
+  <text x="404" y="511" fill="#06b6d4" font-family="monospace" font-size="14" font-weight="500" text-anchor="middle">pip install</text>
+  <rect x="830" y="140" width="370" height="340" rx="10" fill="#030f14" stroke="#06b6d4" stroke-opacity="0.12" stroke-width="1"/>
+  <rect x="830" y="140" width="370" height="36" rx="10" fill="#041820"/>
+  <circle cx="856" cy="158" r="5" fill="#ef4444" opacity="0.7"/>
+  <circle cx="876" cy="158" r="5" fill="#f59e0b" opacity="0.7"/>
+  <circle cx="896" cy="158" r="5" fill="#22c55e" opacity="0.7"/>
+  <text x="916" y="163" fill="#475569" font-family="monospace" font-size="12">agent_msg.py</text>
+  <text x="850" y="205" fill="#64748b" font-family="monospace" font-size="12">from drixl import Message</text>
+  <text x="850" y="252" fill="#7dd3fc" font-family="monospace" font-size="12">msg = Message.build(</text>
+  <text x="850" y="272" fill="#7dd3fc" font-family="monospace" font-size="12">  to="AGT2", fr="AGT1",</text>
+  <text x="850" y="292" fill="#7dd3fc" font-family="monospace" font-size="12">  msg_type="REQ",</text>
+  <text x="850" y="312" fill="#7dd3fc" font-family="monospace" font-size="12">  actions=["ANLY","XTRCT"]</text>
+  <text x="850" y="332" fill="#7dd3fc" font-family="monospace" font-size="12">)</text>
+  <text x="850" y="362" fill="#22d3ee" font-family="monospace" font-size="12"># @to:AGT2 @fr:AGT1 @t:REQ</text>
+  <text x="850" y="382" fill="#22d3ee" font-family="monospace" font-size="12"># ANLY XTRCT</text>
+  <text x="850" y="415" fill="#0891b2" font-family="monospace" font-size="12" opacity="0.5">~25 tokens vs ~120 natural lang</text>
+  <text x="850" y="455" fill="#0891b2" font-family="monospace" font-size="13" opacity="0.5">pypi.org/project/drixl</text>
+</svg>
