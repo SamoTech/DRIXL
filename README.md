@@ -7,6 +7,10 @@
 </h1>
 
 <p align="center">
+  <img src="docs/assets/banner.svg" alt="DRIXL Banner" width="100%">
+</p>
+
+<p align="center">
     <a href="https://github.com/SamoTech/DRIXL/actions/workflows/tests.yml">
         <img alt="Tests" src="https://github.com/SamoTech/DRIXL/actions/workflows/tests.yml/badge.svg"></a>
     <a href="https://pypi.org/project/drixl/">
@@ -140,18 +144,42 @@ from drixl import StructuredMessage
 msg = StructuredMessage(
     to="AGT-QA", fr="AGT-DEV", msg_type="RESPONSE",
     intent="Deliver implementation for code review",
-    content="Implementation complete. See artifact ART-001.",
-    priority="HIGH", status="PENDING"
+    content="Implementation complete with type hints.",
+    thread_id="THREAD-001"
 )
 
-# Add code artifact
 msg.add_artifact("code", """
 def validate_envelope(raw: str) -> dict:
     # Implementation
-    pass
+    return {"to": "AGT2", "fr": "AGT1"}
 """, artifact_id="ART-001")
 
-xml = msg.to_xml()
+msg.add_artifact("test", """
+def test_validate_envelope():
+    result = validate_envelope("@to:AGT2...")
+    assert result is not None
+""", artifact_id="ART-002")
+
+print(msg.to_xml())
+
+# QA sends critique
+qa_msg = StructuredMessage(
+    to="AGT-DEV", fr="AGT-QA", msg_type="CRITIQUE",
+    intent="Review of validate_envelope()",
+    content="""
+    ISSUES:
+    1. Missing error handling for empty strings
+    2. No docstring
+    
+    SUGGESTIONS:
+    1. Add try/except block
+    2. Add comprehensive docstring
+    
+    VERDICT: REVISE
+    """,
+    reply_to=msg.msg_id,
+    thread_id=msg.thread_id
+)
 ```
 
 ### Format Conversion
